@@ -22,14 +22,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy with Bicep
-        uses: azure/arm-deploy@v1
-        if: ${{ endsWith(github.workspace, '.bicep') }}
-        with:
-          subscriptionId: ${{ secrets.AZURE_CREDENTIALS.subscriptionId }}
-          resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP }}
-          template: ./infra/main.bicep
-          parameters: location=${{ env.AZURE_LOCATION }}
 
       - name: Terraform Init
         if: ${{ endsWith(github.workspace, '.tf') }}
